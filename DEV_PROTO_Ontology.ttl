@@ -1,0 +1,653 @@
+@prefix : <http://alpha10x.com/ontology/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix alp: <http://alpha10x.com/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://alpha10x.com/ontology/> .
+
+<http://alpha10x.com/ontology/> rdf:type owl:Ontology ;
+                                 dc:creator """ALPHA10X
+support: sergei@alpha10x.com"""^^rdfs:Literal ;
+                                 dc:description "ALPHA10X canonical domain ontology" ;
+                                 dc:title "ALPHA10X Ontology" ;
+                                 owl:versionInfo "0.0.1" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://alpha10x.com/ontology/acquired
+alp:acquired rdf:type owl:ObjectProperty ;
+             rdfs:domain alp:company ,
+                         alp:organization ;
+             rdfs:range alp:company ,
+                        alp:organization ;
+             rdfs:label "acquired" .
+
+
+###  http://alpha10x.com/ontology/attended
+alp:attended rdf:type owl:ObjectProperty ;
+             rdfs:domain alp:person ;
+             rdfs:range alp:educational_institution ;
+             rdfs:label "attended" .
+
+
+###  http://alpha10x.com/ontology/cites
+alp:cites rdf:type owl:ObjectProperty ;
+          rdfs:domain alp:document ,
+                      alp:patent ;
+          rdfs:range alp:document ,
+                     alp:patent ;
+          rdfs:label "cites" .
+
+
+###  http://alpha10x.com/ontology/graduated_from
+alp:graduated_from rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf alp:attended ;
+                   rdfs:domain alp:person ;
+                   rdfs:range alp:educational_institution ;
+                   rdfs:label "graduated_from" .
+
+
+###  http://alpha10x.com/ontology/has_atc_term
+alp:has_atc_term rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:chemical_compound ;
+                 rdfs:range alp:atc_term ;
+                 rdfs:label "has_atc_term" .
+
+
+###  http://alpha10x.com/ontology/has_child
+alp:has_child rdf:type owl:ObjectProperty ;
+              rdfs:domain alp:patent ;
+              rdfs:range alp:patent ;
+              rdfs:label "has_child" .
+
+
+###  http://alpha10x.com/ontology/has_cpc_code
+alp:has_cpc_code rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:patent ;
+                 rdfs:range alp:cpc_term ;
+                 rdfs:label "has_cpc_code" .
+
+
+###  http://alpha10x.com/ontology/has_crb_industry
+alp:has_crb_industry rdf:type owl:ObjectProperty ;
+                     rdfs:domain alp:company ;
+                     rdfs:range alp:crb_industry .
+
+
+###  http://alpha10x.com/ontology/has_effect_on
+alp:has_effect_on rdf:type owl:ObjectProperty ;
+                  rdfs:domain alp:chemical_compound ;
+                  rdfs:range alp:disease ;
+                  rdfs:label "has_effect_on" .
+
+
+###  http://alpha10x.com/ontology/has_ingredient
+alp:has_ingredient rdf:type owl:ObjectProperty ;
+                   rdfs:domain alp:drug_product ;
+                   rdfs:range alp:chemical_compound ;
+                   rdfs:label "has_ingredient" .
+
+
+###  http://alpha10x.com/ontology/has_parent
+alp:has_parent rdf:type owl:ObjectProperty ;
+               rdfs:domain alp:patent ;
+               rdfs:range alp:patent ;
+               rdfs:label "has_parent" .
+
+
+###  http://alpha10x.com/ontology/has_pharma_class
+alp:has_pharma_class rdf:type owl:ObjectProperty ;
+                     rdfs:domain alp:chemical_compound ,
+                                 alp:drug_product ;
+                     rdfs:range alp:ndfrt_term ;
+                     rdfs:label "has_pharma_class" .
+
+
+###  http://alpha10x.com/ontology/has_salt_solvate
+alp:has_salt_solvate rdf:type owl:ObjectProperty ;
+                     rdfs:domain alp:chemical_compound ;
+                     rdfs:range alp:chemical_compound ;
+                     rdfs:label "has_salt_solvate" .
+
+
+###  http://alpha10x.com/ontology/invested_in
+alp:invested_in rdf:type owl:ObjectProperty ;
+                rdfs:domain alp:organization ,
+                            alp:person ;
+                rdfs:range alp:organization ;
+                rdfs:label "invested_in" .
+
+
+###  http://alpha10x.com/ontology/is_advisor_in
+alp:is_advisor_in rdf:type owl:ObjectProperty ;
+                  rdfs:domain alp:person ;
+                  rdfs:range alp:organization ;
+                  rdfs:label "is_advisor_in" .
+
+
+###  http://alpha10x.com/ontology/is_assignee_of
+alp:is_assignee_of rdf:type owl:ObjectProperty ;
+                   rdfs:domain alp:company ;
+                   rdfs:range alp:patent ;
+                   rdfs:label "is_assignee_of" .
+
+
+###  http://alpha10x.com/ontology/is_associated_with
+alp:is_associated_with rdf:type owl:ObjectProperty ;
+                       rdfs:label "is_associated_with" .
+
+
+###  http://alpha10x.com/ontology/is_associated_with_concept
+alp:is_associated_with_concept rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf alp:is_associated_with ;
+                               rdfs:domain alp:company ;
+                               rdfs:range alp:scientific_concept ;
+                               rdfs:label "is_associated_with_concept" .
+
+
+###  http://alpha10x.com/ontology/is_associated_with_gene
+alp:is_associated_with_gene rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf alp:is_associated_with ;
+                            rdfs:domain alp:disease ;
+                            rdfs:range alp:target ;
+                            rdfs:label "is_associated_with_gene" .
+
+
+###  http://alpha10x.com/ontology/is_board_member_of
+alp:is_board_member_of rdf:type owl:ObjectProperty ;
+                       rdfs:domain alp:person ;
+                       rdfs:range alp:organization ;
+                       rdfs:label "is_board_member_of" .
+
+
+###  http://alpha10x.com/ontology/is_competitor_of
+alp:is_competitor_of rdf:type owl:ObjectProperty ;
+                     rdfs:domain alp:company ;
+                     rdfs:range alp:company ;
+                     rdfs:label "is_competitor_of" .
+
+
+###  http://alpha10x.com/ontology/is_employee_in
+alp:is_employee_in rdf:type owl:ObjectProperty ;
+                   rdfs:domain alp:person ;
+                   rdfs:range alp:organization ;
+                   rdfs:label "is_employee_in" .
+
+
+###  http://alpha10x.com/ontology/is_executive_in
+alp:is_executive_in rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf alp:is_employee_in ;
+                    rdfs:domain alp:person ;
+                    rdfs:range alp:organization ;
+                    rdfs:label "is_executive_in" .
+
+
+###  http://alpha10x.com/ontology/is_expert_on
+alp:is_expert_on rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:person ;
+                 rdfs:range alp:scientific_concept ;
+                 rdfs:label "is_expert_on" .
+
+
+###  http://alpha10x.com/ontology/is_founder_of
+alp:is_founder_of rdf:type owl:ObjectProperty ;
+                  rdfs:domain alp:person ;
+                  rdfs:range alp:organization ;
+                  rdfs:label "is_founder_of" .
+
+
+###  http://alpha10x.com/ontology/is_inventor_of
+alp:is_inventor_of rdf:type owl:ObjectProperty ;
+                   rdfs:domain alp:person ;
+                   rdfs:range alp:patent ;
+                   rdfs:label "is_inventor_of" .
+
+
+###  http://alpha10x.com/ontology/is_investment_partner_of
+alp:is_investment_partner_of rdf:type owl:ObjectProperty ;
+                             rdfs:domain alp:company ,
+                                         alp:organization ,
+                                         alp:person ;
+                             rdfs:range alp:company ,
+                                        alp:organization ,
+                                        alp:person ;
+                             rdfs:label "is_investment_partner_of" .
+
+
+###  http://alpha10x.com/ontology/is_parent_of
+alp:is_parent_of rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:atc_term ,
+                             alp:mesh_term ,
+                             alp:ndfrt_term ,
+                             alp:scientific_concept ;
+                 rdfs:range alp:atc_term ,
+                            alp:mesh_term ,
+                            alp:ndfrt_term ,
+                            alp:scientific_concept ;
+                 rdfs:label "is_parent_of" .
+
+
+###  http://alpha10x.com/ontology/is_partner_of
+alp:is_partner_of rdf:type owl:ObjectProperty ;
+                  rdfs:domain alp:company ;
+                  rdfs:range alp:company ;
+                  rdfs:label "is_partner_of" .
+
+
+###  http://alpha10x.com/ontology/is_similar_to
+alp:is_similar_to rdf:type owl:ObjectProperty ;
+                  rdfs:domain alp:company ,
+                              alp:patent ,
+                              alp:scientific_concept ;
+                  rdfs:range alp:company ,
+                             alp:patent ,
+                             alp:scientific_concept ;
+                  rdfs:label "is_similar_to" .
+
+
+###  http://alpha10x.com/ontology/is_sub_organization_of
+alp:is_sub_organization_of rdf:type owl:ObjectProperty ;
+                           rdfs:domain alp:organization ;
+                           rdfs:range alp:organization ;
+                           rdfs:label "is_sub_organization_of" .
+
+
+###  http://alpha10x.com/ontology/is_supplier_of
+alp:is_supplier_of rdf:type owl:ObjectProperty ;
+                   rdfs:domain alp:company ;
+                   rdfs:range alp:company ;
+                   rdfs:label "is_supplier_of" .
+
+
+###  http://alpha10x.com/ontology/manufactures
+alp:manufactures rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:company ;
+                 rdfs:range alp:drug_product ;
+                 rdfs:label "manufactures" .
+
+
+###  http://alpha10x.com/ontology/mentioned_in_publication
+alp:mentioned_in_publication rdf:type owl:ObjectProperty ;
+                             rdfs:domain alp:chemical_compound ,
+                                         alp:target ;
+                             rdfs:range alp:document ;
+                             rdfs:label "mentioned_in_publication" .
+
+
+###  http://alpha10x.com/ontology/participated_in
+alp:participated_in rdf:type owl:ObjectProperty ;
+                    rdfs:domain alp:organization ,
+                                alp:person ;
+                    rdfs:range alp:funding_round ;
+                    rdfs:label "participated_in" .
+
+
+###  http://alpha10x.com/ontology/raised
+alp:raised rdf:type owl:ObjectProperty ;
+           rdfs:domain alp:company ;
+           rdfs:range alp:funding_round .
+
+
+###  http://alpha10x.com/ontology/relates_to
+alp:relates_to rdf:type owl:ObjectProperty ;
+               rdfs:domain alp:patent ,
+                           alp:scientific_paper ;
+               rdfs:range alp:mesh_term ,
+                          alp:scientific_concept ;
+               rdfs:label "relates_to" .
+
+
+###  http://alpha10x.com/ontology/targets
+alp:targets rdf:type owl:ObjectProperty ;
+            rdfs:domain alp:chemical_compound ;
+            rdfs:range alp:target ;
+            rdfs:label "targets" .
+
+
+###  http://alpha10x.com/ontology/works_in
+alp:works_in rdf:type owl:ObjectProperty ;
+             rdfs:domain alp:company ;
+             rdfs:range alp:industry ;
+             rdfs:label "works_in" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://alpha10x.com/ontology/article
+alp:article rdf:type owl:Class ;
+            rdfs:subClassOf alp:document ;
+            rdfs:comment """An article or piece is a written work published in a print or electronic medium. It may be for the purpose of propagating news, research results, academic analysis, or debate.
+
+An article, such as a news article or piece of investigative report. Newspapers and magazines have articles of many different types and this is intended to cover them all.""" ;
+            rdfs:label "Article" .
+
+
+###  http://alpha10x.com/ontology/atc_term
+alp:atc_term rdf:type owl:Class ;
+             rdfs:subClassOf alp:medical_concept ;
+             rdfs:comment """The Anatomical Therapeutic Chemical (ATC) Classification System is used for the classification of active ingredients of drugs according to the organ or system on which they act and their therapeutic, pharmacological and chemical properties. It is controlled by the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC), and was first published in 1976.
+
+https://bioportal.bioontology.org/ontologies/ATC""" ;
+             rdfs:label "ATC_term" .
+
+
+###  http://alpha10x.com/ontology/business_event
+alp:business_event rdf:type owl:Class ;
+                   rdfs:subClassOf alp:event ;
+                   rdfs:label "Business_event" .
+
+
+###  http://alpha10x.com/ontology/chemical_compound
+alp:chemical_compound rdf:type owl:Class ;
+                      rdfs:subClassOf alp:medical_entity ;
+                      rdfs:comment """A chemical compound is a chemical substance composed of many identical molecules (or molecular entities) composed of atoms from more than one element held together by chemical bonds. A molecule consisting of atoms of only one element is therefore not a compound.
+
+There are four types of compounds, depending on how the constituent atoms are held together:
+
+ - molecules held together by covalent bonds
+ - ionic compounds held together by ionic bonds
+ - intermetallic compounds held together by metallic bonds
+ - certain complexes held together by coordinate covalent bonds.""" ;
+                      rdfs:label "Chemical_compound" .
+
+
+###  http://alpha10x.com/ontology/company
+alp:company rdf:type owl:Class ;
+            rdfs:subClassOf alp:organization ;
+            rdfs:comment """A company, abbreviated as co., is a legal entity representing an association of people, whether natural, legal or a mixture of both, with a specific objective. Company members share a common purpose and unite to achieve specific, declared goals. Companies take various forms, such as:
+
+ - voluntary associations, which may include nonprofit organizations
+ - business entities, whose aim is generating profit
+ - financial entities and banks
+ - programs or educational institutions.""" ;
+            rdfs:label "Company" .
+
+
+###  http://alpha10x.com/ontology/concept
+alp:concept rdf:type owl:Class ;
+            rdfs:subClassOf owl:Thing ;
+            rdfs:comment "Concepts are defined as abstract ideas. They are understood to be the fundamental building blocks of the concept behind principles, thoughts and beliefs. They play an important role in all aspects of cognition. As such, concepts are studied by several disciplines, such as linguistics, psychology, and philosophy, and these disciplines are interested in the logical and psychological structure of concepts, and how they are put together to form thoughts and sentences. The study of concepts has served as an important flagship of an emerging interdisciplinary approach called cognitive science." ;
+            rdfs:label "Concept" .
+
+
+###  http://alpha10x.com/ontology/conference
+alp:conference rdf:type owl:Class ;
+               rdfs:subClassOf alp:event ;
+               rdfs:comment """A conference is a meeting of two or more experts to discuss and exchange opinions or new information about a particular topic.
+
+Conferences can be used as a form of group decision-making, although discussion, not always decisions, are the main purpose of conferences.""" ;
+               rdfs:label "Conference" .
+
+
+###  http://alpha10x.com/ontology/cpc_term
+alp:cpc_term rdf:type owl:Class ;
+             rdfs:subClassOf alp:concept ;
+             rdfs:comment """The Cooperative Patent Classification (CPC) is a patent classification system, which has been jointly developed by the European Patent Office (EPO) and the United States Patent and Trademark Office (USPTO). The CPC is substantially based on the previous European classification system (ECLA), which itself was a more specific and detailed version of the International Patent Classification (IPC) system.
+
+https://www.cooperativepatentclassification.org/home""" ;
+             rdfs:label "CPC_term" .
+
+
+###  http://alpha10x.com/ontology/crb_industry
+alp:crb_industry rdf:type owl:Class ;
+                 rdfs:subClassOf alp:concept ;
+                 rdfs:comment """At Crunchbase, we organize our company data using 700+ Industries and 40+ Industry Groups.  
+
+View the full list of the Industries and Industry Groups in Crunchbase here. https://support.crunchbase.com/hc/en-us/articles/360043146954
+
+Industry Groups are broader subjects that encompass multiple industries. Industries are more specific market segments.""" ;
+                 rdfs:label "Crunchbase_industry" .
+
+
+###  http://alpha10x.com/ontology/deal
+alp:deal rdf:type owl:Class ;
+         rdfs:subClassOf alp:transaction ;
+         rdfs:comment """Mergers and acquisitions (M&A) is a general term that describes the consolidation of companies or assets through various types of financial transactions, including mergers, acquisitions, consolidations, tender offers, purchase of assets, and management acquisitions.
+
+https://www.investopedia.com/terms/m/mergersandacquisitions.asp""" ;
+         rdfs:label "Deal" .
+
+
+###  http://alpha10x.com/ontology/disease
+alp:disease rdf:type owl:Class ;
+            rdfs:subClassOf alp:medical_entity ;
+            rdfs:comment "A disease or phenotype in the Platform is understood as any disease, phenotype, biological process or measurement that might have any type of causality relationship with a human target." ;
+            rdfs:label "Disease" .
+
+
+###  http://alpha10x.com/ontology/document
+alp:document rdf:type owl:Class ;
+             rdfs:subClassOf owl:Thing ;
+             rdfs:comment "A document is a written, drawn, presented, or memorialized representation of thought, often the manifestation of non-fictional, as well as fictional, content." ;
+             rdfs:label "Document" .
+
+
+###  http://alpha10x.com/ontology/drug
+alp:drug rdf:type owl:Class ;
+         rdfs:subClassOf alp:drug_product ;
+         rdfs:comment """A chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism.
+
+A drug in the platform is understood as any bioactive molecule with drug-like properties as defined in the EMBL-EBI ChEMBL database.
+A drug in the Platform might belong to different modalities, including small molecules, antibodies or oligonucleotides among others. However, some biologic therapies such as vaccines, blood products or cell therapies are not represented in our drug set. Moreover, the molecule-centric definition implies multi-ingredient drugs won't be represented and only their individual active moieties might be available on the site.""" ;
+         rdfs:label "Drug" .
+
+
+###  http://alpha10x.com/ontology/drug_product
+alp:drug_product rdf:type owl:Class ;
+                 rdfs:subClassOf alp:medical_product ;
+                 rdfs:comment """A drug is any chemical substance that causes a change in an organism's physiology or psychology when consumed. Drugs are typically distinguished from food and substances that provide nutritional support. Consumption of drugs can be via inhalation, injection, smoking, ingestion, absorption via a patch on the skin, suppository, or dissolution under the tongue.
+
+In pharmacology, a drug is a chemical substance, typically of known structure, which, when administered to a living organism, produces a biological effect.[5] A pharmaceutical drug, also called a medication or medicine, is a chemical substance used to treat, cure, prevent, or diagnose a disease or to promote well-being.Traditionally drugs were obtained through extraction from medicinal plants, but more recently also by organic synthesis. Pharmaceutical drugs may be used for a limited duration, or on a regular basis for chronic disorders.""" ;
+                 rdfs:label "Drug_product" .
+
+
+###  http://alpha10x.com/ontology/educational_institution
+alp:educational_institution rdf:type owl:Class ;
+                            rdfs:subClassOf alp:organization ;
+                            rdfs:comment "An educational institution (or educational organization) is a place where people of different ages gain an education, including preschools, childcare, primary-elementary schools, secondary-high schools, and universities. They provide a large variety of learning environments and learning spaces." ,
+                                         "An educational organization." ;
+                            rdfs:label "Educational_institution" .
+
+
+###  http://alpha10x.com/ontology/event
+alp:event rdf:type owl:Class ;
+          rdfs:label "Event" .
+
+
+###  http://alpha10x.com/ontology/funding_round
+alp:funding_round rdf:type owl:Class ;
+                  rdfs:subClassOf alp:transaction ;
+                  rdfs:comment """The term A round financing refers to funding that a startup or other young private company receives from private equity investors or venture capitalists. New companies raise funds in a series of stages. The A round is normally the second stage of financing that a company receives, and is also the first major funding round in the venture capital stage. In many cases, investors who provide A round financing typically receive convertible preferred stock.
+
+https://www.investopedia.com/terms/a/a-round-private-equity.asp""" ;
+                  rdfs:label "Funding_round" .
+
+
+###  http://alpha10x.com/ontology/government_organization
+alp:government_organization rdf:type owl:Class ;
+                            rdfs:subClassOf alp:organization ;
+                            rdfs:comment "A governmental organization or agency." ,
+                                         """State ownership, also called government ownership and public ownership, is the ownership of an industry, asset, or enterprise by the state or a public body representing a community as opposed to an individual or private party. Public ownership specifically refers to industries selling goods and services to consumers and differs from public goods and government services financed out of a government's general budget. Public ownership can take place at the national, regional, local, or municipal levels of government; or can refer to non-governmental public ownership vested in autonomous public enterprises. Public ownership is one of the three major forms of property ownership, differentiated from private, collective/cooperative, and common ownership.
+
+In market-based economies, state-owned assets are often managed and operated as joint-stock corporations with a government owning all or a controlling stake of the company's shares. This form is often referred to as a state-owned enterprise. A state-owned enterprise might variously operate as a not-for-profit corporation, as it may not be required to generate a profit; as a commercial enterprise in competitive sectors; or as a natural monopoly. Governments may also use the profitable entities they own to support the general budget. The creation of a state-owned enterprise from other forms of public property is called corporatization.""" ;
+                            rdfs:label "Government_organization" .
+
+
+###  http://alpha10x.com/ontology/industry
+alp:industry rdf:type owl:Class ;
+             rdfs:subClassOf alp:concept ;
+             rdfs:label "Industry" .
+
+
+###  http://alpha10x.com/ontology/investment_fund
+alp:investment_fund rdf:type owl:Class ;
+                    rdfs:subClassOf alp:company ;
+                    rdfs:comment "A.k.a. Investment vehicle. The superclass for collective/pooled investment vehicles/funds. This is a union of FIBO Management Company and Investment Trust." ;
+                    rdfs:label "Investment_fund" .
+
+
+###  http://alpha10x.com/ontology/journal
+alp:journal rdf:type owl:Class ;
+            rdfs:comment "An academic journal or scholarly journal is a periodical publication in which scholarship relating to a particular academic discipline is published. Academic journals serve as permanent and transparent forums for the presentation, scrutiny, and discussion of research. They are usually peer-reviewed or refereed." ;
+            rdfs:label "Journal" .
+
+
+###  http://alpha10x.com/ontology/medical_concept
+alp:medical_concept rdf:type owl:Class ;
+                    rdfs:subClassOf alp:concept ;
+                    rdfs:comment "The most generic type of cocept related to health and the practice of medicine." ;
+                    rdfs:label "Medical_concept" .
+
+
+###  http://alpha10x.com/ontology/medical_entity
+alp:medical_entity rdf:type owl:Class ;
+                   rdfs:subClassOf owl:Thing ;
+                   rdfs:comment "The most generic type of entity related to health and the practice of medicine." ;
+                   rdfs:label "Medical_entity" .
+
+
+###  http://alpha10x.com/ontology/medical_product
+alp:medical_product rdf:type owl:Class ;
+                    rdfs:subClassOf alp:medical_entity ;
+                    rdfs:label "Medical_product" .
+
+
+###  http://alpha10x.com/ontology/mesh_term
+alp:mesh_term rdf:type owl:Class ;
+              rdfs:subClassOf alp:medical_concept ;
+              rdfs:comment """MESH taxonomy comes from MESH Ontology.  The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information. MeSH includes the subject headings appearing in MEDLINE/PubMed, the NLM Catalog, and other NLM databases.
+
+https://bioportal.bioontology.org/ontologies/MESH""" ;
+              rdfs:label "MeSH_term" .
+
+
+###  http://alpha10x.com/ontology/ndfrt_term
+alp:ndfrt_term rdf:type owl:Class ;
+               rdfs:subClassOf alp:medical_concept ;
+               rdfs:comment """National Drug File Reference Terminology (NDF-RT) is produced by the Veterans Health Administration (VHA) as an extension of the VHA National Drug File (VANDF) formulary. It organizes the drug list into a formal representation. NDF-RT is used for modeling drug characteristics including ingredients, chemical structure, dose form, physiologic effect, mechanism of action, pharmacokinetics, and related diseases. NDF-RT is part of the Federal Medication Terminologies (FMT), and three components -- Mechanism of Action, Physiologic Effect, and Structural Class - are used in FDA Structured Product Labeling (SPL).
+
+https://nciterms.nci.nih.gov/ncitbrowser/pages/vocabulary.jsf?dictionary=NDFRT""" ;
+               rdfs:label "NDFRT_term" .
+
+
+###  http://alpha10x.com/ontology/non_profit_organization
+alp:non_profit_organization rdf:type owl:Class ;
+                            rdfs:subClassOf alp:organization ;
+                            rdfs:comment "A nonprofit organization (NPO), also known as a non-business entity, not-for-profit organization,[2] or nonprofit institution, is a legal entity organized and operated for a collective, public or social benefit, in contrast with an entity that operates as a business aiming to generate a profit for its owners. A nonprofit is subject to the non-distribution constraint: any revenues that exceed expenses must be committed to the organization's purpose, not taken by private parties. An array of organizations are nonprofit, including some political organizations, schools, business associations, churches, social clubs, and consumer cooperatives. Nonprofit entities may seek approval from governments to be tax-exempt, and some may also qualify to receive tax-deductible contributions, but an entity may incorporate as a nonprofit entity without securing tax-exempt status." ,
+                                         "Non-profit organisation" ;
+                            rdfs:label "Non-profit_organization" .
+
+
+###  http://alpha10x.com/ontology/organization
+alp:organization rdf:type owl:Class ;
+                 rdfs:subClassOf owl:Thing ;
+                 rdfs:comment "An organization, or organisation (Commonwealth English; see spelling differences), is an entity—such as a company, an institution, or an association—comprising one or more people and having a particular purpose." ;
+                 rdfs:label "Organization" .
+
+
+###  http://alpha10x.com/ontology/patent
+alp:patent rdf:type owl:Class ;
+           rdfs:subClassOf alp:publication ;
+           rdfs:comment """A patent is a type of intellectual property that gives its owner the legal right to exclude others from making, using, or selling an invention for a limited period of time in exchange for publishing an enabling disclosure of the invention.[1] In most countries, patent rights fall under private law and the patent holder must sue someone infringing the patent in order to enforce their rights. In some industries patents are an essential form of competitive advantage; in others they are irrelevant.
+
+Here we treat patent as publication of patent""" ;
+           rdfs:label "Patent" .
+
+
+###  http://alpha10x.com/ontology/person
+alp:person rdf:type owl:Class ;
+           rdfs:subClassOf owl:Thing ;
+           rdfs:comment "A person (alive, dead, undead, or fictional)." ;
+           rdfs:label "Person" .
+
+
+###  http://alpha10x.com/ontology/publication
+alp:publication rdf:type owl:Class ;
+                rdfs:subClassOf alp:document ;
+                rdfs:comment "The publication is the distribution of copies or phonorecords of a work to the public by sale or other transfer of ownership, or by rental, lease, or lending. The offering to distribute copies or phonorecords to a group of people for purposes of further distribution, public performance, or public display, constitutes publication. A public performance or display of a work does not of itself constitute publication." ;
+                rdfs:label "Publication" .
+
+
+###  http://alpha10x.com/ontology/research_organization
+alp:research_organization rdf:type owl:Class ;
+                          rdfs:subClassOf alp:organization ;
+                          rdfs:comment "A Research Organization (e.g. scientific institute, research company)." ;
+                          rdfs:label "Research_organization" .
+
+
+###  http://alpha10x.com/ontology/scientific_concept
+alp:scientific_concept rdf:type owl:Class ;
+                       rdfs:subClassOf alp:concept ;
+                       rdfs:comment """Scientific concept comes from DBpedia Categories and Resources connection graph. 
+
+DBPedia taxonomy could be constructed from two main entitles Category and Resource. Categories are organized in hierarchy in terms of DAG (direct acyclic graph) where each term has one or more parents (defined by relation skos:broader in DBpedia) and several or none children. Each category has list of instances or Resources which linked by relation dct:subject. Resources are endpoints and have direct link to Wikipedia page with same title.
+
+https://dbpedia.org/fct/""" ;
+                       rdfs:label "Scientific_concept" .
+
+
+###  http://alpha10x.com/ontology/scientific_paper
+alp:scientific_paper rdf:type owl:Class ;
+                     rdfs:subClassOf alp:publication ;
+                     rdfs:comment "In academic publishing, a paper is an academic work that is usually published in an academic journal. It contains original research results or reviews existing results. Such a paper, also called an article, will only be considered valid if it undergoes a process of peer review by one or more referees (who are academics in the same field) who check that the content of the paper is suitable for publication in the journal. A paper may undergo a series of reviews, revisions, and re-submissions before finally being accepted or rejected for publication." ;
+                     rdfs:label "Scientific_paper" .
+
+
+###  http://alpha10x.com/ontology/target
+alp:target rdf:type owl:Class ;
+           rdfs:subClassOf alp:medical_entity ;
+           rdfs:comment """A target in the Platform is understood as any naturally-occurring molecule that can be targeted by a medicinal product. EMBL-EBI Ensembl database is used as source for human targets in the Platform, with the Ensembl gene ID as the primary identifier. The criteria for target inclusion is the next:
+ - Genes from all biotypes encoded in canonical chromosomes
+ - Genes in alternative assemblies encoding for a reviewed protein product.
+
+This definition accounts for some of the complexities of human targets. Not only protein coding genes can act as targets, as RNAs or pseudogenes are also considered. However, the current definition has some potential drawbacks. Some drug targets are the result of interactions between genes (e.g. gene fusion) or proteins (e.g. protein complexes). The current target entity does not yet consider these cases, which will be addressed in the future.""" ;
+           rdfs:label "Target" .
+
+
+###  http://alpha10x.com/ontology/transaction
+alp:transaction rdf:type owl:Class ;
+                rdfs:subClassOf owl:Thing ;
+                rdfs:comment """A transaction is a completed agreement between a buyer and a seller to exchange goods, services, or financial assets in return for money.
+
+In business bookkeeping, this plain definition of \"transaction\" can get tricky. A transaction may be recorded by a company earlier or later depending on whether it uses accrual accounting or cash accounting.
+
+https://www.investopedia.com/terms/t/transaction.asp""" ;
+                rdfs:label "Transaction" .
+
+
+###  http://alpha10x.com/ontology/vaccine
+alp:vaccine rdf:type owl:Class ;
+            rdfs:subClassOf alp:drug_product ;
+            rdfs:comment "A vaccine is a biological preparation that provides active acquired immunity to a particular infectious disease. A vaccine typically contains an agent that resembles a disease-causing microorganism and is often made from weakened or killed forms of the microbe, its toxins, or one of its surface proteins. The agent stimulates the body's immune system to recognize the agent as a threat, destroy it, and to further recognize and destroy any of the microorganisms associated with that agent that it may encounter in the future. Vaccines can be prophylactic (to prevent or ameliorate the effects of a future infection by a natural or \"wild\" pathogen), or therapeutic (to fight a disease that has already occurred, such as cancer). Some vaccines offer full sterilizing immunity, in which infection is prevented completely." ;
+            rdfs:label "Vaccine" .
+
+
+###  http://www.w3.org/2002/07/owl#Thing
+owl:Thing rdf:type owl:Class ;
+          rdfs:label "Thing" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
