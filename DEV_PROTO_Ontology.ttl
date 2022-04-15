@@ -77,6 +77,7 @@ alp:has_atc_term rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/has_child
 alp:has_child rdf:type owl:ObjectProperty ;
+              owl:inverseOf alp:has_parent ;
               rdfs:domain alp:patent ;
               rdfs:range alp:patent ;
               rdfs:label "has_child" .
@@ -178,6 +179,7 @@ alp:is_associated_with_gene rdf:type owl:ObjectProperty ;
 alp:is_board_member_of rdf:type owl:ObjectProperty ;
                        rdfs:domain alp:person ;
                        rdfs:range alp:organization ;
+                       rdfs:comment "Identifies the organization for which this person is the board member." ;
                        rdfs:label "is_board_member_of" .
 
 
@@ -192,6 +194,7 @@ alp:is_competitor_of rdf:type owl:ObjectProperty ;
 alp:is_employee_in rdf:type owl:ObjectProperty ;
                    rdfs:domain alp:person ;
                    rdfs:range alp:organization ;
+                   rdfs:comment "Identifies the organization for which this person is the employee." ;
                    rdfs:label "is_employee_in" .
 
 
@@ -200,6 +203,7 @@ alp:is_executive_in rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf alp:is_employee_in ;
                     rdfs:domain alp:person ;
                     rdfs:range alp:organization ;
+                    rdfs:comment "Identifies the organization for which this person is the executive." ;
                     rdfs:label "is_executive_in" .
 
 
@@ -226,11 +230,10 @@ alp:is_inventor_of rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/is_investment_partner_of
 alp:is_investment_partner_of rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf alp:is_partner_of ;
                              rdfs:domain alp:company ,
-                                         alp:organization ,
                                          alp:person ;
                              rdfs:range alp:company ,
-                                        alp:organization ,
                                         alp:person ;
                              rdfs:label "is_investment_partner_of" .
 
@@ -250,8 +253,10 @@ alp:is_parent_of rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/is_partner_of
 alp:is_partner_of rdf:type owl:ObjectProperty ;
-                  rdfs:domain alp:company ;
-                  rdfs:range alp:company ;
+                  rdfs:domain alp:company ,
+                              alp:person ;
+                  rdfs:range alp:company ,
+                             alp:person ;
                   rdfs:label "is_partner_of" .
 
 
@@ -271,6 +276,14 @@ alp:is_sub_organization_of rdf:type owl:ObjectProperty ;
                            rdfs:domain alp:organization ;
                            rdfs:range alp:organization ;
                            rdfs:label "is_sub_organization_of" .
+
+
+###  http://alpha10x.com/ontology/is_subsidiary_of
+alp:is_subsidiary_of rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf alp:is_sub_organization_of ;
+                     rdfs:domain alp:company ;
+                     rdfs:range alp:company ;
+                     rdfs:label "is_subsidiary_of" .
 
 
 ###  http://alpha10x.com/ontology/is_supplier_of
