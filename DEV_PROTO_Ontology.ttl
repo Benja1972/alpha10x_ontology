@@ -13,7 +13,7 @@
 support: sergei@alpha10x.com"""^^rdfs:Literal ;
                                  dc:description "ALPHA10X canonical domain ontology" ;
                                  dc:title "ALPHA10X Ontology" ;
-                                 owl:versionInfo "0.0.1" .
+                                 owl:versionInfo "0.0.2" .
 
 #################################################################
 #    Annotation properties
@@ -238,6 +238,15 @@ alp:is_investment_partner_of rdf:type owl:ObjectProperty ;
                              rdfs:label "is_investment_partner_of" .
 
 
+###  http://alpha10x.com/ontology/is_member_of
+alp:is_member_of rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:person ;
+                 rdfs:range alp:organization ;
+                 rdfs:comment """Indicates that a person is a member of the Organization with no indication of the nature of that membership or the role played. Note that the choice of property name is not meant to limit the property to only formal membership arrangements, it is also indended to cover related concepts such as affilliation or other involvement in the organization. Extensions can specialize this relationship to indicate particular roles within the organization or more nuanced relationships to the organization. Has an optional inverse, `org:hasmember`.
+Extracted  from (sameAs - org:memberOf): https://www.w3.org/ns/org""" ;
+                 rdfs:label "is_member_of" .
+
+
 ###  http://alpha10x.com/ontology/is_parent_of
 alp:is_parent_of rdf:type owl:ObjectProperty ;
                  rdfs:domain alp:atc_term ,
@@ -258,6 +267,15 @@ alp:is_partner_of rdf:type owl:ObjectProperty ;
                   rdfs:range alp:company ,
                              alp:person ;
                   rdfs:label "is_partner_of" .
+
+
+###  http://alpha10x.com/ontology/is_responsible_organization
+alp:is_responsible_organization rdf:type owl:ObjectProperty ;
+                                rdfs:domain alp:organization ;
+                                rdfs:range alp:clinical_trial ;
+                                rdfs:comment """Indicates that an organization is responsible for clinical study
+https://clinicaltrials.gov/ct2/manage-recs/faq#responsibleParty""" ;
+                                rdfs:label "is_responsible_organization" .
 
 
 ###  http://alpha10x.com/ontology/is_similar_to
@@ -385,6 +403,12 @@ There are four types of compounds, depending on how the constituent atoms are he
  - intermetallic compounds held together by metallic bonds
  - certain complexes held together by coordinate covalent bonds.""" ;
                       rdfs:label "Chemical_compound" .
+
+
+###  http://alpha10x.com/ontology/clinical_trial
+alp:clinical_trial rdf:type owl:Class ;
+                   rdfs:subClassOf alp:medical_entity ;
+                   rdfs:label "Clinical_trial" .
 
 
 ###  http://alpha10x.com/ontology/company
