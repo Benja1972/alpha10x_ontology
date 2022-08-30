@@ -125,6 +125,12 @@ https://www.upcounsel.com/parent-patent""" ;
                       rdfs:label "has_parent_patent" .
 
 
+###  http://alpha10x.com/ontology/has_patent_associated_with
+alp:has_patent_associated_with rdf:type owl:ObjectProperty ;
+                               rdfs:domain alp:company ;
+                               rdfs:range alp:scientific_concept .
+
+
 ###  http://alpha10x.com/ontology/has_pharma_class
 alp:has_pharma_class rdf:type owl:ObjectProperty ;
                      rdfs:domain [ rdf:type owl:Class ;
