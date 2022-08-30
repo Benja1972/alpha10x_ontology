@@ -37,10 +37,9 @@ dc:title rdf:type owl:AnnotationProperty .
 
 ###  http://alpha10x.com/ontology/acquired
 alp:acquired rdf:type owl:ObjectProperty ;
-             rdfs:domain alp:company ,
-                         alp:organization ;
-             rdfs:range alp:company ,
-                        alp:organization ;
+             rdfs:domain alp:company ;
+             rdfs:range alp:company ;
+             rdfs:comment "One company acquire another company  is when one company purchases most or all of another company's shares to gain control of that company." ;
              rdfs:label "acquired" .
 
 
@@ -48,15 +47,14 @@ alp:acquired rdf:type owl:ObjectProperty ;
 alp:attended rdf:type owl:ObjectProperty ;
              rdfs:domain alp:person ;
              rdfs:range alp:educational_institution ;
+             rdfs:comment "If a person attend an institution such as a school, college, or university, he/she go there regularly." ;
              rdfs:label "attended" .
 
 
 ###  http://alpha10x.com/ontology/cites
 alp:cites rdf:type owl:ObjectProperty ;
-          rdfs:domain alp:document ,
-                      alp:patent ;
-          rdfs:range alp:document ,
-                     alp:patent ;
+          rdfs:domain alp:document ;
+          rdfs:range alp:document ;
           rdfs:label "cites" .
 
 
@@ -65,6 +63,7 @@ alp:graduated_from rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf alp:attended ;
                    rdfs:domain alp:person ;
                    rdfs:range alp:educational_institution ;
+                   rdfs:comment "A person is graduated from a university if a person  is recognized by a university as having completed the requirements of a degree studied at the institution." ;
                    rdfs:label "graduated_from" .
 
 
@@ -72,21 +71,27 @@ alp:graduated_from rdf:type owl:ObjectProperty ;
 alp:has_atc_term rdf:type owl:ObjectProperty ;
                  rdfs:domain alp:chemical_compound ;
                  rdfs:range alp:atc_term ;
+                 rdfs:comment """If a chemical compound is classified by ATC code (term) we say that it 'has atc term'
+https://bioportal.bioontology.org/ontologies/ATC""" ;
                  rdfs:label "has_atc_term" .
 
 
-###  http://alpha10x.com/ontology/has_child
-alp:has_child rdf:type owl:ObjectProperty ;
-              owl:inverseOf alp:has_parent ;
-              rdfs:domain alp:patent ;
-              rdfs:range alp:patent ;
-              rdfs:label "has_child" .
+###  http://alpha10x.com/ontology/has_child_patent
+alp:has_child_patent rdf:type owl:ObjectProperty ;
+                     owl:inverseOf alp:has_parent_patent ;
+                     rdfs:domain alp:patent ;
+                     rdfs:range alp:patent ;
+                     rdfs:comment """A parent patent application is typically the first non-provisional patent application submitted for a new invention. An application for a parent patent may include multiple inventions, and a child patent application may be filed on a parent patent application.
+https://www.upcounsel.com/parent-patent""" ;
+                     rdfs:label "has_child_patent" .
 
 
 ###  http://alpha10x.com/ontology/has_cpc_code
 alp:has_cpc_code rdf:type owl:ObjectProperty ;
                  rdfs:domain alp:patent ;
                  rdfs:range alp:cpc_term ;
+                 rdfs:comment """If a patent is classified by CPC code (term) we say that it 'has cpc code'
+https://www.cooperativepatentclassification.org/home""" ;
                  rdfs:label "has_cpc_code" .
 
 
@@ -100,6 +105,7 @@ alp:has_crb_industry rdf:type owl:ObjectProperty ;
 alp:has_effect_on rdf:type owl:ObjectProperty ;
                   rdfs:domain alp:chemical_compound ;
                   rdfs:range alp:disease ;
+                  rdfs:comment "A chemical compound (a drug) has effect on a disease" ;
                   rdfs:label "has_effect_on" .
 
 
@@ -110,17 +116,22 @@ alp:has_ingredient rdf:type owl:ObjectProperty ;
                    rdfs:label "has_ingredient" .
 
 
-###  http://alpha10x.com/ontology/has_parent
-alp:has_parent rdf:type owl:ObjectProperty ;
-               rdfs:domain alp:patent ;
-               rdfs:range alp:patent ;
-               rdfs:label "has_parent" .
+###  http://alpha10x.com/ontology/has_parent_patent
+alp:has_parent_patent rdf:type owl:ObjectProperty ;
+                      rdfs:domain alp:patent ;
+                      rdfs:range alp:patent ;
+                      rdfs:comment """A parent patent application is typically the first non-provisional patent application submitted for a new invention. An application for a parent patent may include multiple inventions, and a child patent application may be filed on a parent patent application.
+https://www.upcounsel.com/parent-patent""" ;
+                      rdfs:label "has_parent_patent" .
 
 
 ###  http://alpha10x.com/ontology/has_pharma_class
 alp:has_pharma_class rdf:type owl:ObjectProperty ;
-                     rdfs:domain alp:chemical_compound ,
-                                 alp:drug_product ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( alp:chemical_compound
+                                                 alp:drug_product
+                                               )
+                                 ] ;
                      rdfs:range alp:ndfrt_term ;
                      rdfs:label "has_pharma_class" .
 
@@ -134,8 +145,11 @@ alp:has_salt_solvate rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/invested_in
 alp:invested_in rdf:type owl:ObjectProperty ;
-                rdfs:domain alp:organization ,
-                            alp:person ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( alp:organization
+                                            alp:person
+                                          )
+                            ] ;
                 rdfs:range alp:organization ;
                 rdfs:label "invested_in" .
 
@@ -151,19 +165,23 @@ alp:is_advisor_in rdf:type owl:ObjectProperty ;
 alp:is_assignee_of rdf:type owl:ObjectProperty ;
                    rdfs:domain alp:company ;
                    rdfs:range alp:patent ;
+                   rdfs:comment "Connect a patent with its the assignees/applicants." ;
                    rdfs:label "is_assignee_of" .
 
 
 ###  http://alpha10x.com/ontology/is_associated_with
 alp:is_associated_with rdf:type owl:ObjectProperty ;
+                       rdfs:comment "It defines a general association of one entity with another" ;
                        rdfs:label "is_associated_with" .
 
 
 ###  http://alpha10x.com/ontology/is_associated_with_concept
 alp:is_associated_with_concept rdf:type owl:ObjectProperty ;
                                rdfs:subPropertyOf alp:is_associated_with ;
+                               rdf:type owl:SymmetricProperty ;
                                rdfs:domain alp:company ;
                                rdfs:range alp:scientific_concept ;
+                               rdfs:comment "It defines an association of a company  with a concept. Usually it is done by NLP annotation." ;
                                rdfs:label "is_associated_with_concept" .
 
 
@@ -231,10 +249,16 @@ alp:is_inventor_of rdf:type owl:ObjectProperty ;
 ###  http://alpha10x.com/ontology/is_investment_partner_of
 alp:is_investment_partner_of rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf alp:is_partner_of ;
-                             rdfs:domain alp:company ,
-                                         alp:person ;
-                             rdfs:range alp:company ,
-                                        alp:person ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( alp:company
+                                                         alp:person
+                                                       )
+                                         ] ;
+                             rdfs:range [ rdf:type owl:Class ;
+                                          owl:unionOf ( alp:company
+                                                        alp:person
+                                                      )
+                                        ] ;
                              rdfs:label "is_investment_partner_of" .
 
 
@@ -249,24 +273,31 @@ Extracted  from (sameAs - org:memberOf): https://www.w3.org/ns/org""" ;
 
 ###  http://alpha10x.com/ontology/is_parent_of
 alp:is_parent_of rdf:type owl:ObjectProperty ;
-                 rdfs:domain alp:atc_term ,
-                             alp:mesh_term ,
-                             alp:ndfrt_term ,
-                             alp:scientific_concept ;
-                 rdfs:range alp:atc_term ,
-                            alp:mesh_term ,
-                            alp:ndfrt_term ,
-                            alp:scientific_concept ;
+                 rdfs:domain alp:concept ;
+                 rdfs:range alp:concept ;
                  rdfs:label "is_parent_of" .
 
 
 ###  http://alpha10x.com/ontology/is_partner_of
 alp:is_partner_of rdf:type owl:ObjectProperty ;
-                  rdfs:domain alp:company ,
-                              alp:person ;
-                  rdfs:range alp:company ,
-                             alp:person ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( alp:company
+                                              alp:person
+                                            )
+                              ] ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( alp:company
+                                             alp:person
+                                           )
+                             ] ;
                   rdfs:label "is_partner_of" .
+
+
+###  http://alpha10x.com/ontology/is_related_to
+alp:is_related_to rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf alp:is_similar_to ;
+                  rdfs:comment "Consider to use this type of relation for Topics only" ;
+                  rdfs:label "is_related_to" .
 
 
 ###  http://alpha10x.com/ontology/is_responsible_organization
@@ -279,13 +310,20 @@ https://clinicaltrials.gov/ct2/manage-recs/faq#responsibleParty""" ;
 
 
 ###  http://alpha10x.com/ontology/is_similar_to
-alp:is_similar_to rdf:type owl:ObjectProperty ;
-                  rdfs:domain alp:company ,
-                              alp:patent ,
-                              alp:scientific_concept ;
-                  rdfs:range alp:company ,
-                             alp:patent ,
-                             alp:scientific_concept ;
+alp:is_similar_to rdf:type owl:ObjectProperty ,
+                           owl:SymmetricProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( alp:company
+                                              alp:patent
+                                              alp:scientific_concept
+                                            )
+                              ] ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( alp:company
+                                             alp:patent
+                                             alp:scientific_concept
+                                           )
+                             ] ;
                   rdfs:label "is_similar_to" .
 
 
@@ -320,18 +358,39 @@ alp:manufactures rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/mentioned_in_publication
 alp:mentioned_in_publication rdf:type owl:ObjectProperty ;
-                             rdfs:domain alp:chemical_compound ,
-                                         alp:target ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( alp:chemical_compound
+                                                         alp:target
+                                                       )
+                                         ] ;
                              rdfs:range alp:document ;
                              rdfs:label "mentioned_in_publication" .
 
 
+###  http://alpha10x.com/ontology/operates_in_sector
+alp:operates_in_sector rdf:type owl:ObjectProperty ;
+                       rdfs:domain alp:company ;
+                       rdfs:range alp:industry ;
+                       rdfs:comment "Each company is assigned to a sub-industry, and to an industry, industry group, and sector, by its principal business activity." ;
+                       rdfs:label "operates_in_sector" .
+
+
 ###  http://alpha10x.com/ontology/participated_in
 alp:participated_in rdf:type owl:ObjectProperty ;
-                    rdfs:domain alp:organization ,
-                                alp:person ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( alp:organization
+                                                alp:person
+                                              )
+                                ] ;
                     rdfs:range alp:funding_round ;
                     rdfs:label "participated_in" .
+
+
+###  http://alpha10x.com/ontology/posted_job
+alp:posted_job rdf:type owl:ObjectProperty ;
+               rdfs:domain alp:organization ;
+               rdfs:range alp:job_posting ;
+               rdfs:label "posted_job" .
 
 
 ###  http://alpha10x.com/ontology/raised
@@ -342,10 +401,16 @@ alp:raised rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/relates_to
 alp:relates_to rdf:type owl:ObjectProperty ;
-               rdfs:domain alp:patent ,
-                           alp:scientific_paper ;
-               rdfs:range alp:mesh_term ,
-                          alp:scientific_concept ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( alp:patent
+                                           alp:scientific_paper
+                                         )
+                           ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( alp:mesh_term
+                                          alp:scientific_concept
+                                        )
+                          ] ;
                rdfs:label "relates_to" .
 
 
@@ -354,13 +419,6 @@ alp:targets rdf:type owl:ObjectProperty ;
             rdfs:domain alp:chemical_compound ;
             rdfs:range alp:target ;
             rdfs:label "targets" .
-
-
-###  http://alpha10x.com/ontology/works_in
-alp:works_in rdf:type owl:ObjectProperty ;
-             rdfs:domain alp:company ;
-             rdfs:range alp:industry ;
-             rdfs:label "works_in" .
 
 
 #################################################################
@@ -544,6 +602,11 @@ alp:investment_fund rdf:type owl:Class ;
                     rdfs:subClassOf alp:company ;
                     rdfs:comment "A.k.a. Investment vehicle. The superclass for collective/pooled investment vehicles/funds. This is a union of FIBO Management Company and Investment Trust." ;
                     rdfs:label "Investment_fund" .
+
+
+###  http://alpha10x.com/ontology/job_posting
+alp:job_posting rdf:type owl:Class ;
+                rdfs:label "Job_posting" .
 
 
 ###  http://alpha10x.com/ontology/journal

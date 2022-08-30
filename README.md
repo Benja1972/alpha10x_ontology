@@ -13,7 +13,7 @@
 [DrawIO to RDF](https://github.com/oeg-upm/chowlk_spec)
 
 # Data normalization schemas
-[ALPHA10X Normalization repo](https://dev.azure.com/alpha10x-prod/Microservices/_git/normalization)
+[ALPHA10X Normalization repo](https://dev.azure.com/alpha10x/Rocketship/_git/microservices_normalization)
 
 
 # Publishing ontology
