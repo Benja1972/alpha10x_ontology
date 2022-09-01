@@ -128,7 +128,9 @@ https://www.upcounsel.com/parent-patent""" ;
 ###  http://alpha10x.com/ontology/has_patent_associated_with
 alp:has_patent_associated_with rdf:type owl:ObjectProperty ;
                                rdfs:domain alp:company ;
-                               rdfs:range alp:scientific_concept .
+                               rdfs:range alp:scientific_concept ;
+                               rdfs:comment "A company has a patent associated with scientific concept (typically by NLP information extraction)" ;
+                               rdfs:label "has_patent_associated_with" .
 
 
 ###  http://alpha10x.com/ontology/has_pharma_class
