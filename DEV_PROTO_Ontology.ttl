@@ -43,6 +43,17 @@ alp:acquired rdf:type owl:ObjectProperty ;
              rdfs:label "acquired" .
 
 
+###  http://alpha10x.com/ontology/appeared_in
+alp:appeared_in rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( alp:organization
+                                            alp:person
+                                          )
+                            ] ;
+                rdfs:range alp:business_event ;
+                rdfs:label "appeared_in" .
+
+
 ###  http://alpha10x.com/ontology/attended
 alp:attended rdf:type owl:ObjectProperty ;
              rdfs:domain alp:person ;
@@ -51,11 +62,25 @@ alp:attended rdf:type owl:ObjectProperty ;
              rdfs:label "attended" .
 
 
+###  http://alpha10x.com/ontology/cited
+alp:cited rdf:type owl:ObjectProperty ;
+          rdfs:domain alp:patent ;
+          rdfs:range alp:patent ;
+          rdfs:label "cited" .
+
+
 ###  http://alpha10x.com/ontology/cites
 alp:cites rdf:type owl:ObjectProperty ;
           rdfs:domain alp:document ;
           rdfs:range alp:document ;
           rdfs:label "cites" .
+
+
+###  http://alpha10x.com/ontology/focuses_on
+alp:focuses_on rdf:type owl:ObjectProperty ;
+               rdfs:domain alp:clinical_study ;
+               rdfs:range alp:intervention ;
+               rdfs:label "focuses_on" .
 
 
 ###  http://alpha10x.com/ontology/graduated_from
@@ -67,9 +92,22 @@ alp:graduated_from rdf:type owl:ObjectProperty ;
                    rdfs:label "graduated_from" .
 
 
+###  http://alpha10x.com/ontology/has_alex_concept
+alp:has_alex_concept rdf:type owl:ObjectProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( alp:academic_venue
+                                                 alp:organization
+                                                 alp:person
+                                                 alp:scientific_concept
+                                               )
+                                 ] ;
+                     rdfs:range alp:alex_concept ;
+                     rdfs:label "has_alex_concept" .
+
+
 ###  http://alpha10x.com/ontology/has_atc_term
 alp:has_atc_term rdf:type owl:ObjectProperty ;
-                 rdfs:domain alp:chemical_compound ;
+                 rdfs:domain alp:compound ;
                  rdfs:range alp:atc_term ;
                  rdfs:comment """If a chemical compound is classified by ATC code (term) we say that it 'has atc term'
 https://bioportal.bioontology.org/ontologies/ATC""" ;
@@ -86,13 +124,13 @@ https://www.upcounsel.com/parent-patent""" ;
                      rdfs:label "has_child_patent" .
 
 
-###  http://alpha10x.com/ontology/has_cpc_code
-alp:has_cpc_code rdf:type owl:ObjectProperty ;
+###  http://alpha10x.com/ontology/has_cpc_term
+alp:has_cpc_term rdf:type owl:ObjectProperty ;
                  rdfs:domain alp:patent ;
                  rdfs:range alp:cpc_term ;
                  rdfs:comment """If a patent is classified by CPC code (term) we say that it 'has cpc code'
 https://www.cooperativepatentclassification.org/home""" ;
-                 rdfs:label "has_cpc_code" .
+                 rdfs:label "has_cpc_term" .
 
 
 ###  http://alpha10x.com/ontology/has_crb_industry
@@ -103,7 +141,7 @@ alp:has_crb_industry rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/has_effect_on
 alp:has_effect_on rdf:type owl:ObjectProperty ;
-                  rdfs:domain alp:chemical_compound ;
+                  rdfs:domain alp:compound ;
                   rdfs:range alp:disease ;
                   rdfs:comment "A chemical compound (a drug) has effect on a disease" ;
                   rdfs:label "has_effect_on" .
@@ -112,8 +150,19 @@ alp:has_effect_on rdf:type owl:ObjectProperty ;
 ###  http://alpha10x.com/ontology/has_ingredient
 alp:has_ingredient rdf:type owl:ObjectProperty ;
                    rdfs:domain alp:drug_product ;
-                   rdfs:range alp:chemical_compound ;
+                   rdfs:range alp:compound ;
                    rdfs:label "has_ingredient" .
+
+
+###  http://alpha10x.com/ontology/has_mesh_term
+alp:has_mesh_term rdf:type owl:ObjectProperty ;
+                  rdfs:domain alp:scientific_paper ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( alp:alex_concept
+                                             alp:mesh_term
+                                           )
+                             ] ;
+                  rdfs:label "has_mesh_term" .
 
 
 ###  http://alpha10x.com/ontology/has_parent_patent
@@ -136,7 +185,7 @@ alp:has_patent_associated_with rdf:type owl:ObjectProperty ;
 ###  http://alpha10x.com/ontology/has_pharma_class
 alp:has_pharma_class rdf:type owl:ObjectProperty ;
                      rdfs:domain [ rdf:type owl:Class ;
-                                   owl:unionOf ( alp:chemical_compound
+                                   owl:unionOf ( alp:compound
                                                  alp:drug_product
                                                )
                                  ] ;
@@ -146,8 +195,8 @@ alp:has_pharma_class rdf:type owl:ObjectProperty ;
 
 ###  http://alpha10x.com/ontology/has_salt_solvate
 alp:has_salt_solvate rdf:type owl:ObjectProperty ;
-                     rdfs:domain alp:chemical_compound ;
-                     rdfs:range alp:chemical_compound ;
+                     rdfs:domain alp:compound ;
+                     rdfs:range alp:compound ;
                      rdfs:label "has_salt_solvate" .
 
 
@@ -167,6 +216,24 @@ alp:is_advisor_in rdf:type owl:ObjectProperty ;
                   rdfs:domain alp:person ;
                   rdfs:range alp:organization ;
                   rdfs:label "is_advisor_in" .
+
+
+###  http://alpha10x.com/ontology/is_affiliated_with
+alp:is_affiliated_with rdf:type owl:ObjectProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( alp:organization
+                                                   alp:person
+                                                 )
+                                   ] ;
+                       rdfs:range alp:organization ;
+                       rdfs:label "is_affiliated_with" .
+
+
+###  http://alpha10x.com/ontology/is_application_parent_of
+alp:is_application_parent_of rdf:type owl:ObjectProperty ;
+                             rdfs:domain alp:patent ;
+                             rdfs:range alp:patent ;
+                             rdfs:label "is_application_parent_of" .
 
 
 ###  http://alpha10x.com/ontology/is_assignee_of
@@ -201,12 +268,30 @@ alp:is_associated_with_gene rdf:type owl:ObjectProperty ;
                             rdfs:label "is_associated_with_gene" .
 
 
-###  http://alpha10x.com/ontology/is_board_member_of
-alp:is_board_member_of rdf:type owl:ObjectProperty ;
+###  http://alpha10x.com/ontology/is_author_of
+alp:is_author_of rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:person ;
+                 rdfs:range alp:scientific_paper ;
+                 rdfs:label "is_author_of" .
+
+
+###  http://alpha10x.com/ontology/is_board_member_in
+alp:is_board_member_in rdf:type owl:ObjectProperty ;
                        rdfs:domain alp:person ;
                        rdfs:range alp:organization ;
                        rdfs:comment "Identifies the organization for which this person is the board member." ;
-                       rdfs:label "is_board_member_of" .
+                       rdfs:label "is_board_member_in" .
+
+
+###  http://alpha10x.com/ontology/is_collaborator_in
+alp:is_collaborator_in rdf:type owl:ObjectProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( alp:organization
+                                                   alp:person
+                                                 )
+                                   ] ;
+                       rdfs:range alp:clinical_study ;
+                       rdfs:label "is_collaborator_in" .
 
 
 ###  http://alpha10x.com/ontology/is_competitor_of
@@ -247,11 +332,32 @@ alp:is_founder_of rdf:type owl:ObjectProperty ;
                   rdfs:label "is_founder_of" .
 
 
+###  http://alpha10x.com/ontology/is_hosted_in
+alp:is_hosted_in rdf:type owl:ObjectProperty ;
+                 rdfs:domain alp:scientific_paper ;
+                 rdfs:range alp:academic_venue ;
+                 rdfs:label "is_hosted_in" .
+
+
+###  http://alpha10x.com/ontology/is_ingredient_of
+alp:is_ingredient_of rdf:type owl:ObjectProperty ;
+                     rdfs:domain alp:compound ;
+                     rdfs:range alp:drug ;
+                     rdfs:label "is_ingredient_of" .
+
+
 ###  http://alpha10x.com/ontology/is_inventor_of
 alp:is_inventor_of rdf:type owl:ObjectProperty ;
                    rdfs:domain alp:person ;
                    rdfs:range alp:patent ;
                    rdfs:label "is_inventor_of" .
+
+
+###  http://alpha10x.com/ontology/is_investigator_of
+alp:is_investigator_of rdf:type owl:ObjectProperty ;
+                       rdfs:domain alp:person ;
+                       rdfs:range alp:clinical_study ;
+                       rdfs:label "is_investigator_of" .
 
 
 ###  http://alpha10x.com/ontology/is_investment_partner_of
@@ -301,6 +407,20 @@ alp:is_partner_of rdf:type owl:ObjectProperty ;
                   rdfs:label "is_partner_of" .
 
 
+###  http://alpha10x.com/ontology/is_pharma_class_of
+alp:is_pharma_class_of rdf:type owl:ObjectProperty ;
+                       rdfs:domain alp:ndfrt_term ;
+                       rdfs:range alp:drug ;
+                       rdfs:label "is_pharma_class_of" .
+
+
+###  http://alpha10x.com/ontology/is_priority_claim_of
+alp:is_priority_claim_of rdf:type owl:ObjectProperty ;
+                         rdfs:domain alp:patent ;
+                         rdfs:range alp:patent ;
+                         rdfs:label "is_priority_claim_of" .
+
+
 ###  http://alpha10x.com/ontology/is_related_to
 alp:is_related_to rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf alp:is_similar_to ;
@@ -308,13 +428,17 @@ alp:is_related_to rdf:type owl:ObjectProperty ;
                   rdfs:label "is_related_to" .
 
 
-###  http://alpha10x.com/ontology/is_responsible_organization
-alp:is_responsible_organization rdf:type owl:ObjectProperty ;
-                                rdfs:domain alp:organization ;
-                                rdfs:range alp:clinical_trial ;
-                                rdfs:comment """Indicates that an organization is responsible for clinical study
+###  http://alpha10x.com/ontology/is_responsible_party_of
+alp:is_responsible_party_of rdf:type owl:ObjectProperty ;
+                            rdfs:domain [ rdf:type owl:Class ;
+                                          owl:unionOf ( alp:organization
+                                                        alp:person
+                                                      )
+                                        ] ;
+                            rdfs:range alp:clinical_study ;
+                            rdfs:comment """Indicates that an organization is responsible for clinical study
 https://clinicaltrials.gov/ct2/manage-recs/faq#responsibleParty""" ;
-                                rdfs:label "is_responsible_organization" .
+                            rdfs:label "is_responsible_party_of" .
 
 
 ###  http://alpha10x.com/ontology/is_similar_to
@@ -333,6 +457,17 @@ alp:is_similar_to rdf:type owl:ObjectProperty ,
                                            )
                              ] ;
                   rdfs:label "is_similar_to" .
+
+
+###  http://alpha10x.com/ontology/is_sponsor_of
+alp:is_sponsor_of rdf:type owl:ObjectProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( alp:organization
+                                              alp:person
+                                            )
+                              ] ;
+                  rdfs:range alp:clinical_study ;
+                  rdfs:label "is_sponsor_of" .
 
 
 ###  http://alpha10x.com/ontology/is_sub_organization_of
@@ -367,7 +502,7 @@ alp:manufactures rdf:type owl:ObjectProperty ;
 ###  http://alpha10x.com/ontology/mentioned_in_publication
 alp:mentioned_in_publication rdf:type owl:ObjectProperty ;
                              rdfs:domain [ rdf:type owl:Class ;
-                                           owl:unionOf ( alp:chemical_compound
+                                           owl:unionOf ( alp:compound
                                                          alp:target
                                                        )
                                          ] ;
@@ -394,17 +529,22 @@ alp:participated_in rdf:type owl:ObjectProperty ;
                     rdfs:label "participated_in" .
 
 
-###  http://alpha10x.com/ontology/posted_job
-alp:posted_job rdf:type owl:ObjectProperty ;
-               rdfs:domain alp:organization ;
-               rdfs:range alp:job_posting ;
-               rdfs:label "posted_job" .
+###  http://alpha10x.com/ontology/posted
+alp:posted rdf:type owl:ObjectProperty ;
+           rdfs:domain alp:organization ;
+           rdfs:range alp:job_posting ;
+           rdfs:label "posted" .
 
 
 ###  http://alpha10x.com/ontology/raised
 alp:raised rdf:type owl:ObjectProperty ;
            rdfs:domain alp:company ;
            rdfs:range alp:funding_round .
+
+
+###  http://alpha10x.com/ontology/references
+alp:references rdf:type owl:ObjectProperty ;
+               rdfs:label "references" .
 
 
 ###  http://alpha10x.com/ontology/relates_to
@@ -422,9 +562,16 @@ alp:relates_to rdf:type owl:ObjectProperty ;
                rdfs:label "relates_to" .
 
 
+###  http://alpha10x.com/ontology/studies_treatment_of
+alp:studies_treatment_of rdf:type owl:ObjectProperty ;
+                         rdfs:domain alp:clinical_study ;
+                         rdfs:range alp:disease ;
+                         rdfs:label "studies_treatment_of" .
+
+
 ###  http://alpha10x.com/ontology/targets
 alp:targets rdf:type owl:ObjectProperty ;
-            rdfs:domain alp:chemical_compound ;
+            rdfs:domain alp:compound ;
             rdfs:range alp:target ;
             rdfs:label "targets" .
 
@@ -432,6 +579,22 @@ alp:targets rdf:type owl:ObjectProperty ;
 #################################################################
 #    Classes
 #################################################################
+
+###  http://alpha10x.com/ontology/academic_venue
+alp:academic_venue rdf:type owl:Class ;
+                   rdfs:comment """Venues are where works are hosted.
+OpenAlex indexes about 124,000 venues. There are several types, including journals, conferences, preprint repositories, and institutional repositories. The Canonical External ID for venues is ISSN-L, which is a special \"main\" ISSN assigned to every venue (venues tend to have multiple ISSNs). About 90% of venues in OpenAlex have an ISSN-L or ISSN.
+
+https://docs.openalex.org/about-the-data#canonical-external-ids""" ;
+                   rdfs:label "Academic_venue" .
+
+
+###  http://alpha10x.com/ontology/alex_concept
+alp:alex_concept rdf:type owl:Class ;
+                 rdfs:subClassOf alp:concept ;
+                 rdfs:comment "Open Alex identifier of the topic" ;
+                 rdfs:label "OpenAlex_concept" .
+
 
 ###  http://alpha10x.com/ontology/article
 alp:article rdf:type owl:Class ;
@@ -457,24 +620,10 @@ alp:business_event rdf:type owl:Class ;
                    rdfs:label "Business_event" .
 
 
-###  http://alpha10x.com/ontology/chemical_compound
-alp:chemical_compound rdf:type owl:Class ;
-                      rdfs:subClassOf alp:medical_entity ;
-                      rdfs:comment """A chemical compound is a chemical substance composed of many identical molecules (or molecular entities) composed of atoms from more than one element held together by chemical bonds. A molecule consisting of atoms of only one element is therefore not a compound.
-
-There are four types of compounds, depending on how the constituent atoms are held together:
-
- - molecules held together by covalent bonds
- - ionic compounds held together by ionic bonds
- - intermetallic compounds held together by metallic bonds
- - certain complexes held together by coordinate covalent bonds.""" ;
-                      rdfs:label "Chemical_compound" .
-
-
-###  http://alpha10x.com/ontology/clinical_trial
-alp:clinical_trial rdf:type owl:Class ;
+###  http://alpha10x.com/ontology/clinical_study
+alp:clinical_study rdf:type owl:Class ;
                    rdfs:subClassOf alp:medical_entity ;
-                   rdfs:label "Clinical_trial" .
+                   rdfs:label "Clinical_study" .
 
 
 ###  http://alpha10x.com/ontology/company
@@ -487,6 +636,20 @@ alp:company rdf:type owl:Class ;
  - financial entities and banks
  - programs or educational institutions.""" ;
             rdfs:label "Company" .
+
+
+###  http://alpha10x.com/ontology/compound
+alp:compound rdf:type owl:Class ;
+             rdfs:subClassOf alp:medical_entity ;
+             rdfs:comment """A chemical compound is a chemical substance composed of many identical molecules (or molecular entities) composed of atoms from more than one element held together by chemical bonds. A molecule consisting of atoms of only one element is therefore not a compound.
+
+There are four types of compounds, depending on how the constituent atoms are held together:
+
+ - molecules held together by covalent bonds
+ - ionic compounds held together by ionic bonds
+ - intermetallic compounds held together by metallic bonds
+ - certain complexes held together by coordinate covalent bonds.""" ;
+             rdfs:label "Compound" .
 
 
 ###  http://alpha10x.com/ontology/concept
@@ -605,6 +768,16 @@ alp:industry rdf:type owl:Class ;
              rdfs:label "Industry" .
 
 
+###  http://alpha10x.com/ontology/intervention
+alp:intervention rdf:type owl:Class ;
+                 rdfs:subClassOf alp:medical_entity ;
+                 rdfs:comment """Intervention/treatment
+A process or action that is the focus of a clinical study. Interventions include drugs, medical devices, procedures, vaccines, and other products that are either investigational or already available. Interventions can also include noninvasive approaches, such as education or modifying diet and exercise.
+
+https://www.clinicaltrials.gov/ct2/about-studies/glossary""" ;
+                 rdfs:label "Intervention" .
+
+
 ###  http://alpha10x.com/ontology/investment_fund
 alp:investment_fund rdf:type owl:Class ;
                     rdfs:subClassOf alp:company ;
@@ -619,6 +792,7 @@ alp:job_posting rdf:type owl:Class ;
 
 ###  http://alpha10x.com/ontology/journal
 alp:journal rdf:type owl:Class ;
+            rdfs:subClassOf alp:academic_venue ;
             rdfs:comment "An academic journal or scholarly journal is a periodical publication in which scholarship relating to a particular academic discipline is published. Academic journals serve as permanent and transparent forums for the presentation, scrutiny, and discussion of research. They are usually peer-reviewed or refereed." ;
             rdfs:label "Journal" .
 
