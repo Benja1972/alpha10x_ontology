@@ -4,10 +4,10 @@
  
 # Ontology definitions 
 
-[Link1](https://www.w3.org/standards/semanticweb/ontology)
-[Link11](https://www.w3.org/TR/owl2-primer/)
-[Link2](https://en.wikipedia.org/wiki/Ontology_(information_science))
-[Link3](https://en.wikipedia.org/wiki/Ontology_components)
+[Semanticweb and ontology](https://www.w3.org/standards/semanticweb/ontology)
+[OWL2 primer](https://www.w3.org/TR/owl2-primer/)
+[Ontology (information_science)](https://en.wikipedia.org/wiki/Ontology_(information_science))
+[Ontology components](https://en.wikipedia.org/wiki/Ontology_components)
 
 # ALPHA10X Ontology
  The goal of ontology 
